@@ -1,10 +1,8 @@
-<?php 
-// include 'index_php.php'; 
-?>
 <!-- html form -->
 <!DOCTYPE html>
 <html>
 	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script
 		  src="https://code.jquery.com/jquery-3.2.1.js"
 		  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -38,6 +36,28 @@
 		</form>
 
 		<table id="lisiOfNames" style="width:100%">
+		  <tr id="mainRows">
+		    <th>First name</th>
+		    <th>Last name</th> 
+		    <th id="myStrength">Strength</th>
+		    <th></th>
+		  </tr>
+		</table>
+
+		<label>Team 1</label>
+		<table id="team1" style="width:100%">
+		  <tr>
+		    <th>First name</th>
+		    <th>Last name</th> 
+		    <th>Strength</th>
+		    <th></th>
+		  </tr>
+		</table>
+
+		<button id="btnSplit">Split</button><br>
+
+		<label>Team 2</label>
+		<table id="team2" style="width:100%">
 		  <tr>
 		    <th>First name</th>
 		    <th>Last name</th> 
@@ -48,8 +68,7 @@
 
 		<script  
 		src="https://code.jquery.com/jquery-3.2.1.js" 
-		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" 
-		crossorigin="anonymous">
+		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
 		</script>
 		<script type="text/javascript" src="main.js"></script>
 	</body>
