@@ -13,6 +13,10 @@ $(document).ready(function () {
 
 	btnADD.click(function(){
 		//getting input values
+		if (document.getElementById("team1").rows.length - 1 > 0){
+			deleteTeamLists("team1");
+			deleteTeamLists("team2");
+		}
 		let fname = $('#fname').val();
 		let lname = $('#lname').val();
 		let strength = $('#strength').val();
@@ -54,35 +58,28 @@ $(document).ready(function () {
 		if (($('#lisiOfNames tr').length - 1) % 2 != 0){
 			console.log('Please enter another player');
 		}else{
-			splitInToTeams(arrUsers);
+			let copyOfAllPlayers = arrUsers.slice();
+			splitInToTeams(copyOfAllPlayers);
+			// console.log(team_1);
+			// console.log(arrUsers);
 		}
 
 	});
 
 	function splitInToTeams(allPlayers){
 
+		let team_1 = [];
+		let team_2 = [];
+		let sorting = true;
+		let i = 0;
+		let count = 1;
+		let numPlayersEachTeam = allPlayers.length/2;
+
 		//sorting the array by strength 
 		allPlayers.sort(function(a, b){
 		    return a.strength-b.strength
 		})
-		//finding total strength 
-		let totalStrength = allPlayers.reduce(function(sum, val){
-			return sum + val.strength/1;
-		}, 0);
-
-		let team_1 = [];
-		let team_2 = [];
-		let sorting = true;
-		let i = 2;
-		let count = 0;
-		let numPlayersEachTeam = allPlayers.length/2;
-		//adding the first player from main array into team 1
-		team_1.splice(0, 1, allPlayers[0]);
-		allPlayers.shift();
-		console.log(team_1);
-		console.log(allPlayers);
-
-
+		//splitting teams equaly by players strength
 		while(sorting){
 			if(numPlayersEachTeam != team_1.length){
 				team_1.splice(i, 1, allPlayers[i]);
@@ -93,9 +90,6 @@ $(document).ready(function () {
 				sorting = false;
 			}
 		}
-		console.log(team_1);
-		console.log(allPlayers);
-
 		let team1Strength = team_1.reduce(function(sum, val){
 			return sum + val.strength/1;
 		}, 0);
@@ -107,6 +101,7 @@ $(document).ready(function () {
 		splitInToLists(allPlayers, 'team2');
 		console.log("team 1:" + team1Strength);
 		console.log("team 2:" + team2Strength);
+		return;
 	};
 
 	function splitInToLists(listOfPlayers, team){
@@ -122,5 +117,28 @@ $(document).ready(function () {
 	    });
 	    return;
 	}
+
+	function deleteTeamLists(list){
+		let table = document.getElementById(list);
+		for(i = table.rows.length - 1; i > 0; i--)
+		{
+			table. deleteRow(i);
+		}
+		return;
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });

@@ -53,8 +53,8 @@
 		    <th></th>
 		  </tr>
 		</table>
-
-		<button id="btnSplit">Split</button><br>
+		
+		<br>
 
 		<label>Team 2</label>
 		<table id="team2" style="width:100%">
@@ -65,6 +65,8 @@
 		    <th></th>
 		  </tr>
 		</table>
+
+		<button id="btnSplit">Split</button><br>
 
 		<script  
 		src="https://code.jquery.com/jquery-3.2.1.js" 
