@@ -14,9 +14,15 @@
 	</head>
 
 	<body id="body">
-		<form id="form" method="post" action="">
+		<form id="startForm" method="post">
+
+			<input id="projectName" type="text" placeholder="Name of your project" name="">
+			<button id="btnStart">Start</button>
+			
+		</form>
+		<form id="mainForm" method="post" action="">
 			<h2>Please enter names</h2><br>
-			<input id="fname" type="text" name="fname" placeholder="First name" value="<?php echo isset($_POST['fname']) ? $_POST['fname'] : '' ?>"> <br>
+			<input id="fname" type="text" name="fname" placeholder="First name"> <br>
 			<input id="lname" type="text" name="lname" placeholder="Last name" value="<?php echo isset($_POST['lname']) ? $_POST['lname'] : '' ?>"> <br>
 			 
 			<select id="strength" type="number" name="strength">
@@ -51,7 +57,6 @@
 		    <th>First name</th>
 		    <th>Last name</th> 
 		    <th>Strength</th>
-		    <th></th>
 		  </tr>
 		</table>
 

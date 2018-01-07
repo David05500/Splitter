@@ -1,11 +1,24 @@
 $(document).ready(function () {
 
 	let btnADD = $('#btnADD');
-	let form = $('#form');
+	let mainForm = $('#mainForm');
+	let startForm = $('#startForm');
 	let btnSplit = $('#btnSplit');
 	let btnDelete = $('.btnDelete');
+	let btnStart = $('#btnStart');
 	let arrPlayers = [];
 	let x = 0;
+
+	btnStart.click(function(){
+		//creating new db table
+		event.preventDefault();
+		let tname = $('#projectName').val();
+		$.post("createDB_table.php", {
+			tableName: tname,
+		})
+
+		startForm[0].reset();
+	});
 
 	btnADD.click(function(){
 		//getting input values
@@ -28,16 +41,7 @@ $(document).ready(function () {
 			arrPlayers[x] = player;
 			addToDB(arrPlayers);
 			x+=1;
-			//sending the data to the database
-			// $.post("index_php.php", {
-			// 	firstName: fname,
-			// 	lastName: lname,
-			// 	Strength: strength
-			// },
-			// //resetting the inputs
-			// function(){
-			// })
-			form[0].reset();
+			mainForm[0].reset();
 
 			//adding a new player to the list
 			let MainList = document.getElementById('lisiOfNames');

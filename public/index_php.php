@@ -2,16 +2,23 @@
 include 'dbConnection.php'; //connecting to database
 
 //setting defaults
-$fname = $_POST['firstName'];
-$lname = $_POST['lastName'];
-$strength = $_POST['Strength'];
+$tname = $_POST['tableName'];
+echo $tname;
 
 //cleaning user input to prevent SQL injection
-$clean_fname = mysqli_real_escape_string($mysql_connection, $fname);
-$clean_lname = mysqli_real_escape_string($mysql_connection, $lname);
+$clean_tname = mysqli_real_escape_string($mysql_connection, $tname);
 
-// creating a query to add data to the database
-$query = "INSERT INTO playersDetails (firstName, lastName, strength) VALUES ('$clean_fname', '$clean_lname', $strength);";
+// creating a query to add table to the database
+
+$query = "CREATE TABLE `$clean_tname` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `firstName` varchar(255) NOT NULL,
+ `lastName` varchar(255) NOT NULL,
+ `strength` varchar(255) NOT NULL,
+ `team_number` varchar(255) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+AUTO_INCREMENT=1;";
 $result = mysqli_query($mysql_connection, $query);// this line actually writes the data in a database table
 
 // if ($result){
