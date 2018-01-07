@@ -1,0 +1,27 @@
+@font-face {
+    font-family: MSdos;
+    src: url(./fonts/MorePerfectDOSVGA.ttf);
+}
+
+div {
+    font-family: myFirstFont;
+}
+
+body {
+	font-family: MSdos;
+	background-color: #181818;
+	color: #008106;
+}
+
+table {
+margin: 8px;
+}
+
+th, td {
+font-family: MSdos;
+color: #008106;
+padding: 2px 6px;
+border-collapse: separate;
+border: #000;
+}
+

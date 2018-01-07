@@ -10,9 +10,10 @@
 		</script>
 		<!--  Bootstrap -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	    <link rel="stylesheet" type="text/css" href="./styles/style.css">
 	</head>
 
-	<body>
+	<body id="body">
 		<form id="form" method="post" action="">
 			<h2>Please enter names</h2><br>
 			<input id="fname" type="text" name="fname" placeholder="First name" value="<?php echo isset($_POST['fname']) ? $_POST['fname'] : '' ?>"> <br>
@@ -40,7 +41,7 @@
 		    <th>First name</th>
 		    <th>Last name</th> 
 		    <th id="myStrength">Strength</th>
-		    <th></th>
+		    <th>Delete a row</th>
 		  </tr>
 		</table>
 
@@ -53,7 +54,7 @@
 		    <th></th>
 		  </tr>
 		</table>
-		
+
 		<br>
 
 		<label>Team 2</label>
@@ -62,7 +63,6 @@
 		    <th>First name</th>
 		    <th>Last name</th> 
 		    <th>Strength</th>
-		    <th></th>
 		  </tr>
 		</table>
 
