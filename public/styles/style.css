@@ -127,10 +127,10 @@ th{
 	width: 25%;
 }
 
-.invalid{
+/*.invalid{
 	border:3px solid red;
 	border-spacing: 0 10px;
-}
+}*/
 
 .lable label{
 	overflow: hidden; /* Ensures the content is not revealed until the animation */

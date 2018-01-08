@@ -77,10 +77,10 @@ $(document).ready(function () {
 		//checking input values 
 		if ((fname == '') || (lname == '') || (strength == 'select')){
 
-			fname == '' ? $('#fname').addClass("invalid") : null;
-			lname == '' ? $('#lname').addClass("invalid") : null;
-			console.log("I am here");
-			strength == '' ? $('#strength').addClass("invalid") : null;
+			// fname == '' ? $('#fname').addClass("invalid") : null;
+			// lname == '' ? $('#lname').addClass("invalid") : null;
+			// strength == '' ? $('#strength').addClass("invalid") : null;
+			alert("Please fill in all the inputs.")
 
 		}else{
 			//adding players to an array of objects
