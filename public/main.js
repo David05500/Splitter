@@ -1,37 +1,87 @@
 $(document).ready(function () {
-
+	//initializing links to html elements
 	let btnADD = $('#btnADD');
 	let mainForm = $('#mainForm');
 	let startForm = $('#startForm');
+	let projects = $('#projects');
 	let btnSplit = $('#btnSplit');
 	let btnDelete = $('.btnDelete');
 	let btnStart = $('#btnStart');
 	let arrPlayers = [];
 	let x = 0;
+	let tname = '';
+	///------getting project names to populate the select box
+	// $.ajax
+	//  ({
+	//   type:'GET',
+	//   url:'updateDB.php',
+	//   dataType: "json",
+	//   contentType: "application/json",
+	//   data:JSON.stringify( {
+	//    // add_player:'add_player',
+	//    players: 'Projects'
+	//   }),
+	//   success:function(response) {
+	//    if(response.error === true)
+	//    {
+	//     console.log(response.error_text);
+	//    }
+	//   }
+	//  });
 
 	btnStart.click(function(){
 		//creating new db table
 		event.preventDefault();
-		let tname = $('#projectName').val();
+		tname = $('#projectName').val();
 		$.post("createDB_table.php", {
 			tableName: tname,
 		})
-
 		startForm[0].reset();
+		projects.append($("<option></option>").text(tname));
+		projects.val(tname);
+		$.ajax
+		 ({
+		  type:'POST',
+		  url:'updateDB.php',
+		  dataType: "json",
+		  contentType: "application/json",
+		  data:JSON.stringify( {
+		   tname: tname
+		  }),
+		  success:function(response) {
+		   if(response.error === true)
+		   {
+		    console.log(response.error_text);
+		   }
+		  }
+		 });
+		return;
+
+	});
+	//when new projec is chosen through select box all lists must be updated
+	projects.change(function(){
+		tname = projects.val()
+		getData(tname);
 	});
 
 	btnADD.click(function(){
-		//getting input values
+		//if user adds to the main list after it has been split up, then empty 'team' lists in order to split the new list again
 		if (document.getElementById("team1").rows.length - 1 > 0){
 			deleteTeamLists("team1");
 			deleteTeamLists("team2");
 		}
+		//getting input values
 		let fname = $('#fname').val();
 		let lname = $('#lname').val();
 		let strength = $('#strength').val();
 		//checking input values 
 		if ((fname == '') || (lname == '') || (strength == 'select')){
-			console.log('please enter your details');
+
+			fname == '' ? $('#fname').addClass("invalid") : null;
+			lname == '' ? $('#lname').addClass("invalid") : null;
+			console.log("I am here");
+			strength == '' ? $('#strength').addClass("invalid") : null;
+
 		}else{
 			//adding players to an array of objects
 			let player = new Object();
@@ -43,23 +93,23 @@ $(document).ready(function () {
 			x+=1;
 			mainForm[0].reset();
 
-			//adding a new player to the list
+			//adding a new player to the main list
 			let MainList = document.getElementById('lisiOfNames');
 			let row = MainList.insertRow(-1);
 		    let cell_fname = row.insertCell(0);
 		    let cell_lname = row.insertCell(1);
 		    let cell_strength = row.insertCell(2);
-		    let cell_delete = row.insertCell(3);
 		    cell_fname.innerHTML = fname;
 		    cell_lname.innerHTML = lname;
 		    cell_strength.innerHTML = strength;
-		    cell_delete.innerHTML = '<button class="btnDelete">X</button>';
 		}
+		
 	});
-
+	//
 	btnSplit.click(function(){
 		if (($('#team1 tr').length - 1) == 0 ){
-			if (($('#lisiOfNames tr').length - 1) % 2 != 0){
+			if (($('#lisiOfNames tr').length - 1) % 2 != 0){//checkong if the number of players in th main list is even
+				$('#lisiOfNames').addClass('invalid');
 				console.log('Please enter another player');
 			}else{
 				let copyOfAllPlayers = arrPlayers.slice();
@@ -70,7 +120,6 @@ $(document).ready(function () {
 
 	function splitInToTeams(allPlayers){
 		let team_1 = [];
-		// let team_2 = [];
 		let sorting = true;
 		let i = 0;
 		let count = 1;
@@ -106,6 +155,7 @@ $(document).ready(function () {
 		allPlayers = allPlayers.concat(team_1);
 		editDB(allPlayers);
 		splitInToLists(allPlayers);
+		//this could be used to show each teams total strength
 		console.log("team 1:" + team1Strength);
 		console.log("team 2:" + team2Strength);
 		return;
@@ -125,8 +175,27 @@ $(document).ready(function () {
 	    return;
 	}
 
+	function getData(tableName){
+		$.ajax
+		 ({
+		  type:'GET',
+		  url:'updateDB.php',
+		  dataType: "json",
+		  contentType: "application/json",
+		  data:JSON.stringify( {
+		   tableName: tableName
+		  }),
+		  success:function(response) {
+		   if(response.error === true)
+		   {
+		    console.log(response.error_text);
+		   }
+		  }
+		 });
+		return;
+	}	
+
 	function editDB(allPlayers){
-		// let name = document.getElementById()
 		$.ajax
 		 ({
 		  type:'UPDATE',
@@ -134,7 +203,6 @@ $(document).ready(function () {
 		  dataType: "json",
 		  contentType: "application/json",
 		  data:JSON.stringify( {
-		   // add_player:'add_player',
 		   players: allPlayers
 		  }),
 		  success:function(response) {
@@ -148,7 +216,6 @@ $(document).ready(function () {
 	}
 
 	function addToDB(Player){
-		// let name = document.getElementById()
 		$.ajax
 		 ({
 		  type:'POST',
@@ -156,7 +223,6 @@ $(document).ready(function () {
 		  dataType: "json",
 		  contentType: "application/json",
 		  data:JSON.stringify( {
-		   // add_player:'add_player',
 		   players: Player
 		  }),
 		  success:function(response) {
@@ -177,9 +243,4 @@ $(document).ready(function () {
 		}
 		return;
 	};
-	btnDelete.on("click", event =>{
-		console.log('Helllo');
-		let par = $(this).parent().parent(); //tr 
-		par.remove();
-	}); 
 });

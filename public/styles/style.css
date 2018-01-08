@@ -3,25 +3,151 @@
     src: url(./fonts/MorePerfectDOSVGA.ttf);
 }
 
-div {
-    font-family: myFirstFont;
-}
-
-body {
+#container {
 	font-family: MSdos;
 	background-color: #181818;
 	color: #008106;
-}
-
-table {
-margin: 8px;
+	min-height:100vh;
+	padding: 25px 50px;
 }
 
 th, td {
 font-family: MSdos;
-color: #008106;
 padding: 2px 6px;
 border-collapse: separate;
-border: #000;
+}
+#header{
+	font-size: 200%;
+	text-align: center;
+	padding: 5px;
+	padding-bottom: 5%;
+
+}
+#startForm{
+	display: flex; 
+	justify-content: space-around;
+	border-bottom: 2px solid white;
+	margin-bottom: 1%;
+	padding-bottom: 2%;
+}
+#mainForm{
+	display: flex;
+	justify-content: space-around;
+	border: 5px /*solid*/ blue;
+	padding: 3% 3%;
+}
+.tables{
+	border: 5px /*solid*/ yellow;
+	display: block;
+
+}
+#btnSplit{
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+#lisiOfNames{
+	/*border: 5px solid pink;*/
+	width: 100%;
+	padding-bottom: 5%;
+	border-collapse: separate;
+    border-spacing: 0 10px;
+
+
+
+}
+.teams{
+	display: inline-block;
+	width: 100%;
+	border: 5px /*solid*/ red;
+
+}
+#team2{
+	/*border: 5px solid green;*/
+	width: 49%;
+	border-collapse: separate;
+    border-spacing: 0 10px;
+	padding-bottom: 5%;
+	box-sizing: border-box;
+	margin-left: 2%;
+
+}
+#team1{
+	/*border: 5px solid purple;*/
+	width: 49%;
+	float: left;
+	padding-bottom: 5%;
+	margin-right: 2%;
+	border-collapse: separate;
+    border-spacing: 0 10px;
+    box-sizing: border-box;
+
+
+}
+
+table{
+   border: 1px solid white;
+}
+th, td{
+	text-align: center;
+	border-bottom: 1px solid white;
+}
+th{
+	font-size: 120%;
+}
+.lable{
+	font-size: 150%;
+	text-align: center;
+	border-bottom: 2px solid white;
+}
+.buttonSplit{
+	width: 100%;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+	padding-top: 3%;
+	padding-bottom: 3%;
+
+}
+#btnSplit{
+	width: 30%;
+	height: 10%;
+	border:3px solid #228B22;
+	background-color: #ededed;
+
+}
+#btnStart, #btnADD{
+	border:3px solid #228B22;
+	width: 10%;
+	background-color: #ededed;
+
+}
+
+#projectName{
+	width: 25%;
+}
+
+.invalid{
+	border:3px solid red;
+	border-spacing: 0 10px;
+}
+
+.lable label{
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+	white-space: nowrap; /* Keeps the content on a single line */
+	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+	letter-spacing: .15em; /* Adjust as needed */
+	animation: 
+	typing 3.5s steps(40, end),
+	blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+	from { width: 0 }
+	to { width: 100% }
+}
+#btnStart{
+	width: 30%;
 }
 
